@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PeritoApp - Sistema Completo de Perícia Forense Digital. Software brasileiro para peritos criminais e judiciais.">
+    <meta name="keywords" content="perícia forense, software forense, perito criminal, perito judicial, análise digital, WhatsApp forense, cellebrite alternativa">
+    <title>PeritoApp - Sistema de Perícia Forense Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #10b981;
+            --warning: #f59e0b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            background: rgba(37, 99, 235, 0.2);
+            color: #60a5fa;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge i {
+            color: var(--accent);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .hero-mockup {
+            background: linear-gradient(145deg, #1e293b, #334155);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .mockup-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mockup-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .mockup-dot.red { background: #ef4444; }
+        .mockup-dot.yellow { background: #f59e0b; }
+        .mockup-dot.green { background: #10b981; }
+
+        .mockup-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .mockup-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .mockup-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .mockup-card span {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: white;
+            padding: 4rem 2rem;
+            margin-top: -4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-tag {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list li i {
+            color: var(--accent);
+            font-size: 0.875rem;
+        }
+
+        /* Modules Section */
+        .modules {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .modules-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .module-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .module-card:hover {
+            border-color: var(--primary);
+            transform: scale(1.02);
+        }
+
+        .module-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .module-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-card p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Comparison Section */
+        .comparison {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+        }
+
+        .comparison .section-header h2 {
+            color: white;
+        }
+
+        .comparison .section-header p {
+            color: #94a3b8;
+        }
+
+        .comparison-table {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.25rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(37, 99, 235, 0.3);
+            font-weight: 600;
+        }
+
+        .comparison-table th:first-child,
+        .comparison-table td:first-child {
+            text-align: left;
+            padding-left: 2rem;
+        }
+
+        .comparison-table .highlight {
+            background: rgba(37, 99, 235, 0.15);
+        }
+
+        .comparison-table .check {
+            color: var(--accent);
+            font-size: 1.25rem;
+        }
+
+        .comparison-table .cross {
+            color: #ef4444;
+            font-size: 1.25rem;
+        }
+
+        /* Workflow Section */
+        .workflow {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+
+        .workflow-steps {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            position: relative;
+        }
+
+        .workflow-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .workflow-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .workflow-step h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .workflow-step p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background: var(--gradient);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .contact-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-item a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .contact-item span {
+            display: block;
+            color: var(--gray);
+            font-size: 0.875rem;
+            font-weight: 400;
+        }
+
+        .trial-box {
+            background: var(--gradient);
+            padding: 3rem;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .trial-box h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .trial-box p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .trial-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .trial-features li {
+            padding: 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .trial-features li i {
+            color: #10b981;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-brand p {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #64748b;
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .whatsapp-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-badges {
+                justify-content: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                display: none;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modules-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .workflow-steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .workflow-steps::before {
+                display: none;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+                padding: 2rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .comparison-table {
+                overflow-x: auto;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-search"></i>
+                PeritoApp
+            </div>
+            <ul class="nav-links">
+                <li><a href="#funcionalidades">Funcionalidades</a></li>
+                <li><a href="#modulos">Módulos</a></li>
+                <li><a href="#comparativo">Comparativo</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <a href="https://wa.me/5542991274857?text=Olá! Gostaria de saber mais sobre o PeritoApp" class="nav-cta">
+                <i class="fab fa-whatsapp"></i> Falar Conosco
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text fade-in">
+                <h1>Sistema Completo de <span>Perícia Forense Digital</span></h1>
+                <p>Solução brasileira All-in-One para peritos criminais e judiciais. Captura, análise, gestão de casos e geração de laudos em um único software.</p>
+                
+                <div class="hero-badges">
+                    <div class="badge"><i class="fas fa-check"></i> 100% em Português</div>
+                    <div class="badge"><i class="fas fa-check"></i> Offline</div>
+                    <div class="badge"><i class="fas fa-check"></i> Trial 7 dias</div>
+                    <div class="badge"><i class="fas fa-check"></i> .NET 8.0</div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="https://wa.me/5542991274857?text=Olá! Quero solicitar o TRIAL do PeritoApp" class="btn-primary">
+                        <i class="fas fa-download"></i> Solicitar TRIAL Grátis
+                    </a>
+                    <a href="#funcionalidades" class="btn-secondary">
+                        <i class="fas fa-play"></i> Ver Funcionalidades
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-image fade-in delay-1">
+                <div class="hero-mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-dot red"></div>
+                        <div class="mockup-dot yellow"></div>
+                        <div class="mockup-dot green"></div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="mockup-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Captura Mobile</span>
+                        </div>
+                        <div class="mockup-card">
+                            <i class="fas fa-comments"></i>
+                            <span>WhatsApp</span>
+                        </div>
+                        <div class="mockup-card">
+                            <i class="fas fa-image"></i>
+                            <span>Análise EXIF</span>
+                        </div>
+                        <div class="mockup-card">
+                            <i class="fas fa-hdd"></i>
+                            <span>Drives</span>
+                        </div>
+                        <div class="mockup-card">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Laudos</span>
+                        </div>
+                        <div class="mockup-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Custódia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number">20+</span>
+                <span class="stat-label">Módulos Forenses</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Formatos Suportados</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Offline</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">ISO</span>
+                <span class="stat-label">27037 Compliant</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="funcionalidades" class="features">
+        <div class="section-header">
+            <span class="section-tag">FUNCIONALIDADES</span>
+            <h2>Tudo que você precisa em um único software</h2>
+            <p>Do dispositivo ao laudo final, o PeritoApp cobre toda a cadeia de trabalho do perito forense digital</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Captura de Dispositivos Móveis</h3>
+                <p>Extração forense completa de smartphones Android e iOS</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Android via MTP (sem root)</li>
+                    <li><i class="fas fa-check"></i> iOS via iTunes/backup</li>
+                    <li><i class="fas fa-check"></i> Preservação de metadados</li>
+                    <li><i class="fas fa-check"></i> Hash SHA-256 automático</li>
+                </ul>
+            </div>
+
+            <div class="feature-card fade-in delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>Análise de Mensageiros</h3>
+                <p>Extração e análise de conversas de aplicativos de mensagens</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> WhatsApp completo</li>
+                    <li><i class="fas fa-check"></i> Telegram</li>
+                    <li><i class="fas fa-check"></i> Messenger/Facebook</li>
+                    <li><i class="fas fa-check"></i> SMS/MMS</li>
+                </ul>
+            </div>
+
+            <div class="feature-card fade-in delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-image"></i>
+                </div>
+                <h3>Análise de Imagens</h3>
+                <p>Extração de metadados EXIF e detecção de manipulação</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Metadados EXIF completos</li>
+                    <li><i class="fas fa-check"></i> Geolocalização GPS</li>
+                    <li><i class="fas fa-check"></i> Análise ELA (edição)</li>
+                    <li><i class="fas fa-check"></i> Identificação de câmera</li>
+                </ul>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Browser Forensics</h3>
+                <p>Análise completa de navegadores web</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Chrome, Firefox, Edge</li>
+                    <li><i class="fas fa-check"></i> Histórico de navegação</li>
+                    <li><i class="fas fa-check"></i> Downloads e cookies</li>
+                    <li><i class="fas fa-check"></i> Senhas salvas</li>
+                </ul>
+            </div>
+
+            <div class="feature-card fade-in delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Email Forensics</h3>
+                <p>Análise de múltiplas fontes de email</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Outlook PST/OST</li>
+                    <li><i class="fas fa-check"></i> Thunderbird MBOX</li>
+                    <li><i class="fas fa-check"></i> Gmail/Webmail</li>
+                    <li><i class="fas fa-check"></i> Headers completos</li>
+                </ul>
+            </div>
+
+            <div class="feature-card fade-in delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-memory"></i>
+                </div>
+                <h3>Memory Forensics</h3>
+                <p>Análise forense de memória RAM</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Processos em execução</li>
+                    <li><i class="fas fa-check"></i> Conexões de rede</li>
+                    <li><i class="fas fa-check"></i> Strings na memória</li>
+                    <li><i class="fas fa-check"></i> Dump de memória</li>
+                </ul>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <h3>Assinaturas Digitais</h3>
+                <p>Validação de assinaturas e certificados</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> ICP-Brasil</li>
+                    <li><i class="fas fa-check"></i> PDF assinados</li>
+                    <li><i class="fas fa-check"></i> Validação de cadeia</li>
+                    <li><i class="fas fa-check"></i> Verificação OCSP/CRL</li>
+                </ul>
+            </div>
+
+            <div class="feature-card fade-in delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>Geração de Laudos</h3>
+                <p>Laudos técnicos profissionais automatizados</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Formato ABNT</li>
+                    <li><i class="fas fa-check"></i> Exportação PDF</li>
+                    <li><i class="fas fa-check"></i> Templates customizáveis</li>
+                    <li><i class="fas fa-check"></i> Assinatura digital</li>
+                </ul>
+            </div>
+
+            <div class="feature-card fade-in delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Gestão de Casos</h3>
+                <p>Gerenciamento completo de perícias</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Cadastro de clientes</li>
+                    <li><i class="fas fa-check"></i> Controle de prazos</li>
+                    <li><i class="fas fa-check"></i> Gestão financeira</li>
+                    <li><i class="fas fa-check"></i> Cadeia de custódia</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section id="modulos" class="modules">
+        <div class="section-header">
+            <span class="section-tag">MÓDULOS ESPECIALIZADOS</span>
+            <h2>19 Fases de Análise Forense</h2>
+            <p>Cobertura completa para qualquer tipo de perícia digital</p>
+        </div>
+
+        <div class="modules-grid">
+            <div class="module-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h4>Captura Mobile</h4>
+                <p>Android & iOS</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-hdd"></i>
+                <h4>Captura Disco</h4>
+                <p>HD, SSD, USB</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-comments"></i>
+                <h4>Mensageiros</h4>
+                <p>WhatsApp, Telegram</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-image"></i>
+                <h4>Multimídia</h4>
+                <p>EXIF, GPS, ELA</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-globe"></i>
+                <h4>Browser</h4>
+                <p>Chrome, Firefox, Edge</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-envelope"></i>
+                <h4>Email</h4>
+                <p>PST, MBOX, EML</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-memory"></i>
+                <h4>Memória RAM</h4>
+                <p>Processos, Strings</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-database"></i>
+                <h4>Registry</h4>
+                <p>Windows Registry</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-cloud"></i>
+                <h4>Cloud</h4>
+                <p>OneDrive, GDrive</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-users"></i>
+                <h4>Redes Sociais</h4>
+                <p>Facebook, Instagram</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-usb"></i>
+                <h4>USB History</h4>
+                <p>Dispositivos conectados</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-network-wired"></i>
+                <h4>Network Sniffer</h4>
+                <p>Captura de pacotes</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-lock"></i>
+                <h4>Túneis Criptog.</h4>
+                <p>VPN, SSH, TLS</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-file-word"></i>
+                <h4>Documentos</h4>
+                <p>Office, PDF</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-signature"></i>
+                <h4>Assinaturas</h4>
+                <p>ICP-Brasil, X.509</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-key"></i>
+                <h4>Credenciais</h4>
+                <p>Senhas, WiFi</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-clock"></i>
+                <h4>Timeline</h4>
+                <p>Atividades unificadas</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-print"></i>
+                <h4>Impressão</h4>
+                <p>Spooler, histórico</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-mobile"></i>
+                <h4>Apps Mobile</h4>
+                <p>Bancos, Uber, iFood</p>
+            </div>
+            <div class="module-card">
+                <i class="fas fa-desktop"></i>
+                <h4>Remoto</h4>
+                <p>Análise remota</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparativo" class="comparison">
+        <div class="section-header">
+            <span class="section-tag" style="background: rgba(255,255,255,0.1);">COMPARATIVO</span>
+            <h2>Por que escolher o PeritoApp?</h2>
+            <p>Comparação com as principais soluções internacionais do mercado</p>
+        </div>
+
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Recurso</th>
+                        <th class="highlight">PeritoApp</th>
+                        <th>Cellebrite</th>
+                        <th>Oxygen</th>
+                        <th>MSAB</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Interface em Português</td>
+                        <td class="highlight"><i class="fas fa-check check"></i> Completo</td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Licença Perpétua</td>
+                        <td class="highlight"><i class="fas fa-check check"></i> Sim</td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Gestão de Casos Integrada</td>
+                        <td class="highlight"><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Gestão Financeira</td>
+                        <td class="highlight"><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Laudos Formato ABNT</td>
+                        <td class="highlight"><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Suporte em Português</td>
+                        <td class="highlight"><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td>100% Offline</td>
+                        <td class="highlight"><i class="fas fa-check check"></i></td>
+                        <td>Parcial</td>
+                        <td>Parcial</td>
+                        <td>Parcial</td>
+                    </tr>
+                    <tr>
+                        <td>Trial Gratuito</td>
+                        <td class="highlight"><i class="fas fa-check check"></i> 7 dias</td>
+                        <td><i class="fas fa-times cross"></i></td>
+                        <td>Demo</td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section class="workflow">
+        <div class="section-header">
+            <span class="section-tag">COMO FUNCIONA</span>
+            <h2>Fluxo de Trabalho Simplificado</h2>
+            <p>Do dispositivo ao laudo final em 5 passos</p>
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <h4>Conectar</h4>
+                <p>Conecte o dispositivo via USB ou selecione a mídia</p>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <h4>Capturar</h4>
+                <p>Extração forense com hash automático</p>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <h4>Analisar</h4>
+                <p>Use os módulos especializados para cada tipo de dado</p>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <h4>Documentar</h4>
+                <p>Cadeia de custódia e assinatura digital</p>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">5</div>
+                <h4>Exportar</h4>
+                <p>Gere o laudo técnico profissional em PDF</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Pronto para modernizar suas perícias?</h2>
+            <p>Solicite agora o TRIAL gratuito de 7 dias e experimente todas as funcionalidades sem compromisso</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/5542991274857?text=Olá! Quero solicitar o TRIAL gratuito do PeritoApp" class="btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Solicitar via WhatsApp
+                </a>
+                <a href="mailto:t7426541@gmail.com?subject=Solicitação de TRIAL - PeritoApp&body=Olá! Gostaria de solicitar o TRIAL gratuito do PeritoApp." class="btn-white">
+                    <i class="fas fa-envelope"></i> Enviar E-mail
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="contact">
+        <div class="section-header">
+            <span class="section-tag">CONTATO</span>
+            <h2>Fale Conosco</h2>
+            <p>Tire suas dúvidas ou solicite uma demonstração personalizada</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Entre em contato</h3>
+                
+                <a href="https://wa.me/5542991274857" class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <span>WhatsApp</span>
+                        +55 (42) 99127-4857
+                    </div>
+                </a>
+
+                <a href="mailto:t7426541@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <span>E-mail</span>
+                        t7426541@gmail.com
+                    </div>
+                </a>
+
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <span>Horário de Atendimento</span>
+                        Segunda a Sexta, 9h às 18h
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-headset"></i>
+                    <div>
+                        <span>Suporte Técnico</span>
+                        Resposta em até 24h úteis
+                    </div>
+                </div>
+            </div>
+
+            <div class="trial-box">
+                <h3>🎁 TRIAL Gratuito</h3>
+                <p>Experimente o PeritoApp por 7 dias sem compromisso</p>
+                
+                <ul class="trial-features">
+                    <li><i class="fas fa-check"></i> Todas as funcionalidades liberadas</li>
+                    <li><i class="fas fa-check"></i> Sem necessidade de cartão de crédito</li>
+                    <li><i class="fas fa-check"></i> Suporte técnico incluído</li>
+                    <li><i class="fas fa-check"></i> Instalação assistida (opcional)</li>
+                    <li><i class="fas fa-check"></i> Desinstalação automática após 7 dias</li>
+                </ul>
+
+                <a href="https://wa.me/5542991274857?text=Olá! Quero solicitar o TRIAL do PeritoApp" class="btn-white" style="width: 100%; justify-content: center;">
+                    <i class="fab fa-whatsapp"></i> Solicitar Agora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3><i class="fas fa-search"></i> PeritoApp</h3>
+                <p>Sistema completo de perícia forense digital desenvolvido no Brasil para peritos brasileiros.</p>
+                <div>
+                    <span style="background: rgba(37, 99, 235, 0.3); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.875rem;">
+                        <i class="fas fa-shield-alt"></i> ISO 27037 | NIST 800-86 | Lei 13.964/2019
+                    </span>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Funcionalidades</h4>
+                <ul>
+                    <li><a href="#funcionalidades">Captura Forense</a></li>
+                    <li><a href="#funcionalidades">Análise de Mensagens</a></li>
+                    <li><a href="#funcionalidades">Análise de Imagens</a></li>
+                    <li><a href="#funcionalidades">Geração de Laudos</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Módulos</h4>
+                <ul>
+                    <li><a href="#modulos">Browser Forensics</a></li>
+                    <li><a href="#modulos">Email Forensics</a></li>
+                    <li><a href="#modulos">Memory Forensics</a></li>
+                    <li><a href="#modulos">Network Sniffer</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="https://wa.me/5542991274857"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    <li><a href="mailto:t7426541@gmail.com"><i class="fas fa-envelope"></i> E-mail</a></li>
+                    <li><a href="#contato">Solicitar TRIAL</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 PeritoApp. Todos os direitos reservados. Software desenvolvido no Brasil 🇧🇷</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/5542991274857?text=Olá! Vim pelo site e gostaria de saber mais sobre o PeritoApp" target="_blank" title="Fale conosco pelo WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .module-card, .workflow-step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
